@@ -27,6 +27,7 @@ const VideoCard = (props) => {
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "flex-end",
+                            zIndex: 9,
                             marginTop: -25,
                         }}
                     >

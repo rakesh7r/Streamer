@@ -12,6 +12,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { Header } from "react-native-elements/dist/header/Header"
 import fire from "../Config/fire"
 import VideoCard from "./Card"
+import Player from "./Player"
 
 function Home({ navigation }) {
     return (
@@ -34,7 +35,7 @@ function Home({ navigation }) {
                         fontWeight: "bold",
                     }}
                 >
-                    Basic App
+                    DegPeg
                 </Text>
                 <TouchableOpacity
                     style={{ padding: 10 }}
@@ -46,10 +47,8 @@ function Home({ navigation }) {
                 </TouchableOpacity>
             </View>
             <ScrollView>
-                <VideoCard navigation={navigation} />
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
+                <Player mediaURL="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" />
+                <Player mediaURL="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8" />
             </ScrollView>
         </View>
     )

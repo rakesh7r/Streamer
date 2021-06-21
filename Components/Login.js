@@ -16,19 +16,19 @@ const Login = () => {
     const handleLogin = () => {
         fire.auth()
             .signInWithEmailAndPassword(email, password)
+            .then((user) => setUser(user))
             .catch((err) => {
-                setSignin("Sign in")
                 switch (err.code) {
                     case "auth/invalid-email":
                     case "auth/user-disabled":
                     case "auth/user-not-defined":
-                        setEmailError(err.message)
+                        setError(err.message)
                         break
                     case "auth/wrong-password":
-                        setPasswordError(err.message)
+                        setError(err.message)
                         break
                     default:
-                        setEmailError(err.message)
+                        setError(err.message)
                         break
                 }
             })
@@ -123,7 +123,7 @@ const Login = () => {
                         </Text>
                     )}
                 </TouchableOpacity>
-                {error ? <Text>{error}</Text> : null}
+                {error ? <Text style={{ color: "red" }}>{error}</Text> : null}
             </View>
         </View>
     )
