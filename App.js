@@ -1,21 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './Components/Home';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Home />
-    </View>
-  );
+import * as React from "react"
+import { View, Text, Button } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
+import Home from "./Components/Home"
+import Login from "./Components/Login"
+import firebase from "firebase"
+import fire from "./Config/fire"
+import CheckAuth from "./Components/CheckAuth"
+const Stack = createStackNavigator()
+function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="CheckAuth">
+                <Stack.Screen
+                    name="CheckAuth"
+                    component={CheckAuth}
+                    options={{ title: "Login" }}
+                />
+                <Stack.Screen
+                    name="Home"
+                    component={Home}
+                    options={{ title: "Home" }}
+                />
+                <Stack.Screen
+                    name="Login"
+                    component={Login}
+                    options={{ title: "Login" }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App

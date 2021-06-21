@@ -1,10 +1,16 @@
 import React from "react"
-import { View, Text } from "react-native"
+import { View, Text, Button } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
 
-export default function Home() {
+function Home({ navigation }) {
     return (
         <View>
-            <Text>Home Component</Text>
+            <Button
+                title="Login"
+                onPress={() => navigation.navigate("Login")}
+            />
         </View>
     )
 }
+export default Home
