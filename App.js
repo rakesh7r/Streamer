@@ -7,15 +7,19 @@ import Login from "./Components/Login"
 import firebase from "firebase"
 import fire from "./Config/fire"
 import CheckAuth from "./Components/CheckAuth"
+import Player from "./Components/Player"
 const Stack = createStackNavigator()
 function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="CheckAuth">
+            <Stack.Navigator
+                initialRouteName="CheckAuth"
+                screenOptions={{ headerShown: false }}
+            >
                 <Stack.Screen
                     name="CheckAuth"
                     component={CheckAuth}
-                    options={{ title: "Login" }}
+                    options={{ title: "Basic App" }}
                 />
                 <Stack.Screen
                     name="Home"
@@ -27,6 +31,7 @@ function App() {
                     component={Login}
                     options={{ title: "Login" }}
                 />
+                <Stack.Screen name="play" component={Player} />
             </Stack.Navigator>
         </NavigationContainer>
     )
