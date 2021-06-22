@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import {
     View,
     Text,
@@ -15,6 +15,18 @@ import VideoCard from "./Card"
 import Player from "./Player"
 
 function Home({ navigation }) {
+    const [post, setPost] = useState()
+    useEffect(() => {
+        fire.firestore()
+            .collection("video-refs")
+            .get()
+            .then((snapshot) => {
+                setPost([])
+                snapshot.forEach((snap) => {
+                    setPost((prevState) => [...prevState, snap.data()])
+                })
+            })
+    }, [])
     return (
         <View>
             <StatusBar backgroundColor="#304C57" />
@@ -46,10 +58,18 @@ function Home({ navigation }) {
                     <Text style={{ color: "white" }}>Sign out</Text>
                 </TouchableOpacity>
             </View>
-            <ScrollView>
-                <Player mediaURL="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" />
+            <ScrollView style={{ marginBottom: 200 }}>
+                {/* <Player mediaURL="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8" />
                 <Player mediaURL="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8" />
+                <Player mediaURL="http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" />
+                <Player mediaURL="https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8" /> */}
+                {post && post.length > 0
+                    ? post.map((p) => <Player key={post.id} post={p} />)
+                    : null}
             </ScrollView>
+            {post && post.length > 0
+                ? post.forEach((p) => console.log(p.mediaURL))
+                : null}
         </View>
     )
 }
